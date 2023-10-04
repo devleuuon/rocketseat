@@ -21,7 +21,7 @@ body {
     --bg-url: url(./assets/bg-mobile.jpg);
     --stroke-color: rgba(255, 255, 255, 0.5);
     --surface-color: rgba(255, 255, 255, 0.1);
-    --surface-color-hover: rgba(255, 255, 255, 0.02);
+    --surface-color-hover: rgba(255, 255, 255, 0.4);
     --social-links-hover: rgba(255, 255, 255, 0.1);
     --switch-bg-url: url(./assets/moon-stars.svg);
 }
@@ -31,7 +31,7 @@ body {
     --bg-url: url(./assets/bg-mobile-light.jpg);
     --stroke-color: rgba(0, 0, 0, 0.10);
     --surface-color: rgba(0, 0, 0, 0.10);
-    --surface-color-hover: rgba(0, 0, 0, 0.02);
+    --surface-color-hover: rgba(0, 0, 0, 0.04);
     --social-links-hover: rgba(0, 0, 0, 0.1);
     --switch-bg-url: url(./assets/sun.svg);
 }
@@ -80,15 +80,19 @@ img {
     /*alinhando o button sobre o span*/
     position: absolute;
     top: 50%;
-    left: 0;
+    left: 0; /*o forwards não é necessario por conta do left ter o padrao 0*/
     z-index: 1;
     transform: translateY(-50%);
+    animation: slide-back 0.2s; /*@keyframe*/
 
 }
 
 .light #switch button {
-    right: 0;
-    left: initial;
+    animation: slide-in 0.2s  forwards; /*forwards: no animation, tem que haver o from, to e um "final". com ele o botao não volta sozinho automaticamente*/
+}
+
+#switch button:hover {
+    outline: 8px solid var(--surface-color-hover);
 }
 
 #switch span {
@@ -173,5 +177,25 @@ footer a {
 
     .light {
         --bg-url: url(./assets/bg-desktop-light.jpg);
+    }
+}
+
+@keyframes slide-in {
+    from {
+        left: 0;
+    }
+
+    to {
+        left: 50%;
+    }
+}
+
+@keyframes slide-back {
+    from {
+        left: 50%;
+    }
+
+    to {
+        left: 0;
     }
 }
